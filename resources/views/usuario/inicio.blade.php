@@ -46,14 +46,14 @@
                                         <i class="fas fa-edit"></i>
                                     </a>
 
-                                    <a  class="btn btn-sm btn-danger" onclick="event.preventDefault();
+                                    {{-- <a  class="btn btn-sm btn-danger" onclick="event.preventDefault();
                                             document.getElementById('delete-form').submit();">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                     <form id="delete-form" action="{{ route('usuario.destroy',$usuario) }}" method="POST" role="form" onsubmit="return confirmarEliminar()">
                                         @method('DELETE')
                                         @csrf
-                                    </form>
+                                    </form> --}}
                                 </td>
                             </tr>
                             @empty
