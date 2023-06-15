@@ -12,7 +12,7 @@
         </a>
         <!--end::Brand Link-->
     </div>
-     <!--end::Sidebar Brand-->
+    <!--end::Sidebar Brand-->
     <!--begin::Sidebar Wrapper-->
     <div class="sidebar-wrapper">
        <nav class="mt-2">
@@ -30,6 +30,29 @@
                         <i class="nav-icon fas fa-user"></i>
                         <p>Usuario</p>
                     </a>
+                </li>
+                <li class="nav-item @if( Request::is('productos')) menu-open @endif">
+                    <a href="#" class="nav-link  @if( Request::is('productos')) active @endif">
+                        <i class="nav-icon fa-solid fa-warehouse"></i>
+                        <p>
+                            Almacén
+                            <i class="nav-arrow fa-solid fa-angle-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/productos" class="nav-link  @if( Request::is('productos')) active @endif">
+                                <i class="nav-icon fa-regular fa-circle"></i>
+                                <p>Productos</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="./index2.html" class="nav-link">
+                                <i class="nav-icon fa-regular fa-circle"></i>
+                                <p>Productos Perecederos</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                {{-- <li class="nav-item" v-for="menu in menus[0]" :key="menu.id">
                    <a :href="menu.enlace" class="nav-link" :class="{ 'active': menu.enlace == ruta }">
