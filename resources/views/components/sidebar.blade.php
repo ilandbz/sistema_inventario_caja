@@ -54,6 +54,29 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item @if( Request::is('administrar-caja')) menu-open @endif">
+                    <a href="#" class="nav-link  @if( Request::is('administrar-caja')) active @endif">
+                        <i class="nav-icon fa-solid fa-cash-register"></i>
+                        <p>
+                            Caja
+                            <i class="nav-arrow fa-solid fa-angle-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/administrar-caja" class="nav-link  @if( Request::is('administrar-caja')) active @endif">
+                                <i class="nav-icon fa-regular fa-circle"></i>
+                                <p>Administrar Caja</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link">
+                                <i class="nav-icon fa-regular fa-circle"></i>
+                                <p>Historial Caja</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                {{-- <li class="nav-item" v-for="menu in menus[0]" :key="menu.id">
                    <a :href="menu.enlace" class="nav-link" :class="{ 'active': menu.enlace == ruta }">
                        <i class="nav-icon" :class="menu.icono"></i>

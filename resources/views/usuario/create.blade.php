@@ -55,10 +55,10 @@
                                 value="{{ old('password_confirmation') }}" autocomplete="password_confirmation"
                             placeholder="Repita Contraseña"/>
                             @error('password_confirmation')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                     </div>
                 </div>

@@ -59,7 +59,7 @@ class ProductoController extends Controller
             'cantidad' => 'required|numeric',
         ];
         $mensajes = [
-            'required' => '* campo oblogatorio',
+            'required' => '* campo obligatorio',
             'numeric' => 'Ingrese Solo números',
             'string' => 'Ingrese caracteres alfanuméricos',
             'max' => 'Máximo :max caracteres'
