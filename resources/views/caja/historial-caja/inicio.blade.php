@@ -3,8 +3,8 @@
 @section('content')
 <div class="card card-primary card-outline">
     <div class="card-header">
-        <h6 class="card-title">
-            Listado de Productos Perecederos
+        <h6 class="card-title font-weight-bold">
+           Historial Caja
         </h6>
     </div>
     <div class="card-body">
@@ -15,46 +15,43 @@
                         <thead class="table-dark">
                             <tr>
                                 <th class="text-center">#</th>
-                                {{-- <th>Categoría</th> --}}
-                                <th class="text-center">Descripción</th>
-                                <th class="text-center">Vence</th>
-                                <th class="text-center">Precio</th>
-                                <th class="text-center">Stock</th>
+                                <th class="text-center">Fecha Apertura</th>
+                                <th class="text-center">Monto Apertura</th>
+                                <th class="text-center">Fecha Cierre</th>
+                                <th class="text-center">Monto Cierre</th>
                                 <th class="text-center">Estado</th>
-                                <th class="text-center">Acciones</th>
+                                {{-- <th class="text-center">Acciones</th> --}}
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($productos as  $producto)
+                            @forelse ($historial_cajas as  $historial)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $producto->nombre }}</td>
-                                <td class="text-center">{{ \Carbon\Carbon::parse($producto->fecha_vencimiento)->format('d/m/Y') }}</td>
-                                <td class="text-center">{{ $producto->precio }}</td>
-                                <td class="text-center">{{ $producto->cantidad }}</td>
+                                <td class="text-center">{{ $loop->iteration }}</td>
+                                <td class="text-center">{{($historial->fecha_apertura) ? \Carbon\Carbon::parse($historial->fecha_apertura)->format('d/m/Y H:i:s') : "" }}</td>
+                                <td class="text-center">{{ $historial->monto_apertura }}</td>
+                                <td class="text-center">{{($historial->fecha_cierre) ? \Carbon\Carbon::parse($historial->fecha_cierre)->format('d/m/Y H:i:s') : "" }}</td>
+                                <td class="text-center">{{$historial->monto_cierre}}</td>
                                 <td class="text-center">
-                                    @if($producto->cantidad > 5)
-                                    <span class="badge bg-success">Vigente</span>
-                                    @elseif ($producto->cantidad >=1 && $producto->cantidad <5)
-                                    <span class="badge bg-info text-dark">Por Agotarse</span>
-                                    @elseif ($producto->cantidad == 0)
-                                    <span class="badge bg-danger">Cant. Agotada</span>
+                                    @if($historial->estado == 0)
+                                    <span class="badge bg-success text-white" >Abierta</span>
+                                    @elseif ($historial->estado == 1)
+                                    <span class="badge bg-secondary text-white" >Cerrada</span>
                                     @endif
                                 </td>
-                                <td>
+                                {{-- <td>
                                     <a  class="btn btn-sm btn-warning" href="{{ route("productos.edit",$producto) }}">
                                         <i class="fas fa-edit"></i>
                                     </a>
 
-                                    {{-- <a  class="btn btn-sm btn-danger" onclick="event.preventDefault();
+                                    <a  class="btn btn-sm btn-danger" onclick="event.preventDefault();
                                             document.getElementById('delete-form').submit();">
                                         <i class="fas fa-trash-alt"></i>
                                     </a>
                                     <form id="delete-form" action="{{ route('producto.destroy',$producto) }}" method="POST" role="form" onsubmit="return confirmarEliminar()">
                                         @method('DELETE')
                                         @csrf
-                                    </form> --}}
-                                </td>
+                                    </form>
+                                </td> --}}
                             </tr>
                             @empty
                                 <tr>
@@ -68,5 +65,5 @@
         </div>
     </div>
 </div>
-
 @endsection
+

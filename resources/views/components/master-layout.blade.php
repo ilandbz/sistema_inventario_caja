@@ -25,7 +25,7 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body class="layout-fixed sidebar-mini sidebar-expand-lg bg-body-tertiary">
-    <div class="app-wrapper">
+    <div class="app-wrapper" id="app-wrapper">
         <x-navbar></x-navbar>
         <x-sidebar></x-sidebar>
         <main class="app-main">
@@ -43,6 +43,8 @@
     <script src="{{asset("plugins/popper/popper.min.js")}}"></script>
     <script src="{{asset("plugins/bootstrap/js/bootstrap.min.js")}}"></script>
     <script src="{{asset("app/js/adminlte.min.js")}}"></script>
+    <script src="{{asset("js/vue.global.prod.js")}}"></script>
+    <script src="{{asset("js/axios.min.js")}}"></script>
 
     <script type="text/javascript">
         function confirmarEliminar()
@@ -77,6 +79,17 @@
                 });
             }
         });
+
+        const mostrarModal = (modal_nombre) => {
+            const myModal = bootstrap.Modal.getOrCreateInstance(modal_nombre);
+            myModal.show();
+        }
+
+        const ocultarModal = (modal_nombre) => {
+            const myModal = bootstrap.Modal.getOrCreateInstance(modal_nombre);
+            myModal.hide();
+        }
     </script>
+    @yield('scripts')
 </body>
 </html>

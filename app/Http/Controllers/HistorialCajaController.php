@@ -12,7 +12,8 @@ class HistorialCajaController extends Controller
      */
     public function index()
     {
-        //
+        $historial_cajas = HistorialCaja::paginate(10);
+        return view('caja.historial-caja.inicio', compact('historial_cajas'));
     }
 
     /**

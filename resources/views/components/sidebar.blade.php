@@ -31,8 +31,8 @@
                         <p>Usuario</p>
                     </a>
                 </li>
-                <li class="nav-item @if( Request::is('productos')) menu-open @endif">
-                    <a href="#" class="nav-link  @if( Request::is('productos')) active @endif">
+                <li class="nav-item @if( in_array( Request::path(), ['productos','producto-perecederos'] )) menu-open @endif">
+                    <a href="#" class="nav-link  @if( in_array( Request::path(), ['productos','producto-perecederos'] )) active @endif">
                         <i class="nav-icon fa-solid fa-warehouse"></i>
                         <p>
                             Almacén
@@ -47,15 +47,15 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="./index2.html" class="nav-link">
+                            <a href="/producto-perecederos" class="nav-link @if( Request::is('producto-perecederos')) active @endif">
                                 <i class="nav-icon fa-regular fa-circle"></i>
                                 <p>Productos Perecederos</p>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item @if( Request::is('administrar-caja')) menu-open @endif">
-                    <a href="#" class="nav-link  @if( Request::is('administrar-caja')) active @endif">
+                <li class="nav-item @if( in_array( Request::path(), ['administrar-caja','historial-cajas'] )) menu-open @endif">
+                    <a href="#" class="nav-link  @if( in_array( Request::path(), ['administrar-caja','historial-cajas'] )) active @endif">
                         <i class="nav-icon fa-solid fa-cash-register"></i>
                         <p>
                             Caja
@@ -70,9 +70,44 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="/historial-cajas" class="nav-link @if( Request::is('historial-cajas')) active @endif">
                                 <i class="nav-icon fa-regular fa-circle"></i>
                                 <p>Historial Caja</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item @if( in_array( Request::path(), ['venta/nueva','cliente', 'venta/anular', 'venta'] )) menu-open @endif">
+                    <a href="#" class="nav-link  @if( in_array( Request::path(), ['venta/nueva','cliente', 'venta/anular', 'venta'] )) active @endif">
+                        <i class="nav-icon fa-solid fa-cart-shopping"></i>
+                        <p>
+                            Ventas
+                            <i class="nav-arrow fa-solid fa-angle-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/cliente" class="nav-link @if( Request::is('cliente')) active @endif">
+                                <i class="nav-icon fa-solid fa-users"></i>
+                                <p>Clientes</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/venta/nueva" class="nav-link  @if( Request::is('venta/nueva')) active @endif">
+                                <i class="nav-icon fa-solid fa-cart-plus"></i>
+                                <p>Realizar Venta</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/venta/anular" class="nav-link  @if( Request::is('venta/anular')) active @endif">
+                                <i class="nav-icon fa-solid fa-store-slash"></i>
+                                <p>Anular Venta</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/venta" class="nav-link  @if( Request::is('venta')) active @endif">
+                                <i class="nav-icon fa-solid fa-cart-plus"></i>
+                                <p>Listar Venta</p>
                             </a>
                         </li>
                     </ul>
