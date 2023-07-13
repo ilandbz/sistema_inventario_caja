@@ -87,9 +87,9 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="/cliente" class="nav-link @if( Request::is('cliente')) active @endif">
-                                <i class="nav-icon fa-solid fa-users"></i>
-                                <p>Clientes</p>
+                            <a href="/venta" class="nav-link  @if( Request::is('venta')) active @endif">
+                                <i class="nav-icon fa-solid fa-cart-plus"></i>
+                                <p>Listar Venta</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -98,18 +98,18 @@
                                 <p>Realizar Venta</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
+                            <a href="/cliente" class="nav-link @if( Request::is('cliente')) active @endif">
+                                <i class="nav-icon fa-solid fa-users"></i>
+                                <p>Clientes</p>
+                            </a>
+                        </li> --}}
+                        {{-- <li class="nav-item">
                             <a href="/venta/anular" class="nav-link  @if( Request::is('venta/anular')) active @endif">
                                 <i class="nav-icon fa-solid fa-store-slash"></i>
                                 <p>Anular Venta</p>
                             </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="/venta" class="nav-link  @if( Request::is('venta')) active @endif">
-                                <i class="nav-icon fa-solid fa-cart-plus"></i>
-                                <p>Listar Venta</p>
-                            </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </li>
                {{-- <li class="nav-item" v-for="menu in menus[0]" :key="menu.id">

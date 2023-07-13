@@ -19,7 +19,7 @@
     <link type="text/css" rel="stylesheet" href="{{ asset("plugins/fontawesome-free/css/all.min.css") }}">
 
     <link type="text/css" rel="stylesheet" href="{{ asset("app/css/adminlte.min.css") }}">
-
+    <link type="text/css" rel="stylesheet" href="{{ asset("plugins/sweetalert2/sweetalert2.min.css") }}">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -42,6 +42,7 @@
     <script src="{{asset("plugins/overlayscrollbars/js/overlayscrollbars.browser.es6.min.js")}}"></script>
     <script src="{{asset("plugins/popper/popper.min.js")}}"></script>
     <script src="{{asset("plugins/bootstrap/js/bootstrap.min.js")}}"></script>
+    <script src="{{asset("plugins/sweetalert2/sweetalert2.min.js")}}"></script>
     <script src="{{asset("app/js/adminlte.min.js")}}"></script>
     <script src="{{asset("js/vue.global.prod.js")}}"></script>
     <script src="{{asset("js/axios.min.js")}}"></script>
@@ -57,6 +58,13 @@
         }
     </script>
     <script>
+        var Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        });
+
         const SELECTOR_SIDEBAR_WRAPPER = ".sidebar-wrapper";
         const Default = {
             scrollbarTheme: "os-theme-light",

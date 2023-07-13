@@ -50,9 +50,20 @@ Route::group([ 'prefix' => 'historial-cajas', 'middleware' => ['auth:sanctum']],
 
 Route::group([ 'prefix' => 'venta', 'middleware' => ['auth:sanctum']],function(){
     Route::get('/',[VentaController::class,'index'])->name('Listado Ventas');
-    Route::get('/nueva',[VentaController::class,'create'])->name(' Nueva Venta');
-    Route::get('/anular',[VentaController::class,'anular'])->name('Anular Venta');
+    Route::group([ 'prefix' => 'nueva', 'middleware' => ['auth:sanctum']],function(){
+        Route::get('/',[VentaController::class,'create'])->name(' Nueva Venta');
+        Route::get('/buscar-productos',[ProductoController::class,'buscarProducto'])
+            ->name('venta-nueva.uscar-productos');
+        Route::post('/guardar-venta',[VentaController::class,'guardarVenta']);
+    });
+    Route::post('anular-venta',[VentaController::class,'anularVenta']);
+    Route::post('habilitar-venta',[VentaController::class,'habilitarVenta']);
 });
+
+// Route::group([ 'prefix' => 'venta-nueva', 'middleware' => ['auth:sanctum']],function(){
+//     Route::get('/nueva',[VentaController::class,'create'])->name(' Nueva Venta');
+//     Route::get('/anular',[VentaController::class,'anular'])->name('Anular Venta');
+// });
 
 Route::group([ 'prefix' => 'cliente', 'middleware' => ['auth:sanctum']],function(){
     Route::get('/',[ClienteController::class,'index'])->name('Listado Clientes');

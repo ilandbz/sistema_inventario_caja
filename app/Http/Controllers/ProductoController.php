@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductoController extends Controller
 {
@@ -77,6 +78,18 @@ class ProductoController extends Controller
 
         $prod = Producto::find($id);
 
-        return redirect('productos')->with('message','El Producto '.$prod->nombre.' fue modificado Satisfactoriamente !');
+        return redirect('productos')->with(
+            'message',
+            'El Producto '.$prod->nombre.' fue modificado Satisfactoriamente !'
+        );
+    }
+
+    public function buscarProducto(Request $request)
+    {
+        $buscar= mb_strtoupper($request->buscar);
+
+        return Producto::select('id','nombre','precio','cantidad')->where(
+            DB::Raw("upper(nombre)"),'like','%'.$buscar.'%')
+            ->get();
     }
 }
