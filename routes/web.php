@@ -67,6 +67,9 @@ Route::group([ 'prefix' => 'venta', 'middleware' => ['auth:sanctum']],function()
 
 Route::group([ 'prefix' => 'cliente', 'middleware' => ['auth:sanctum']],function(){
     Route::get('/',[ClienteController::class,'index'])->name('Listado Clientes');
+    Route::post('guardar',[ClienteController::class,'store'])->name('cliente.guardar');
+    Route::get('editar',[ClienteController::class,'show'])->name('cliente.editar');
+    Route::post('actualizar',[ClienteController::class,'update'])->name('cliente.actualizar');
 });
 
 
