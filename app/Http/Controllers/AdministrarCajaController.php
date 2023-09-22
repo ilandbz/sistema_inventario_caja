@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\HistorialCaja;
+use App\Models\MovimientoCaja;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,12 +14,16 @@ class AdministrarCajaController extends Controller
      */
     public function index()
     {
-        $historial_cajas = HistorialCaja::select('fecha_apertura','monto_apertura')->where(
+        $data['historial_cajas'] = HistorialCaja::select('fecha_apertura','monto_apertura')
+        ->where(
             DB::Raw("CAST(fecha_apertura AS DATE)"),'=',date('Y-m-d')
         )
         ->where('estado',0)
         ->first();
-        return view('caja.administrar-caja.inicio', compact('historial_cajas'));
+
+        $data['ingresoshoy'] = MovimientoCaja::whereDate('fechahora', date('Y-m-d'))->where('tipo', 'INGRESO')->sum('monto');
+        $data['gastoshoy'] = MovimientoCaja::whereDate('fechahora', date('Y-m-d'))->where('tipo', 'GASTO')->sum('monto');
+        return view('caja.administrar-caja.inicio', $data);
     }
 
     public function vistaAbrirCaja()

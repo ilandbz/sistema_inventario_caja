@@ -75,6 +75,12 @@
                                 <p>Historial Caja</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="/movimiento-caja/movimientos" class="nav-link  @if( Request::is('movimientos-caja')) active @endif">
+                                <i class="nav-icon fa-regular fa-circle"></i>
+                                <p>Movimientos Caja</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-item @if( in_array( Request::path(), ['venta/nueva','cliente', 'venta/anular', 'venta'] )) menu-open @endif">

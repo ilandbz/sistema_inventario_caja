@@ -33,7 +33,8 @@
                     sub_total = parseFloat(sub_total) + parseFloat(detalle.importe)
                 });
                 this.venta.sub_total = sub_total
-                this.venta.igv = sub_total*0.18
+                this.venta.igv = sub_total*0
+                // this.venta.igv = sub_total*0.18
                 this.venta.total =this.venta.sub_total + this.venta.igv
                 this.total_pagar = this.venta.total
             }

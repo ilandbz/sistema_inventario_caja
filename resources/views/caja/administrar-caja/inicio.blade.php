@@ -73,43 +73,88 @@
                             <td>
                                 <i class="fa-solid fa-square  fa-xl fa-fw text-success"></i> Ingresos
                             </td>
-                            <td class="text-success font-weight-bold">S/ 0.00 </td>
+                            <td class="text-success font-weight-bold">S/ {{$ingresoshoy}} </td>
                         </tr>
                         <tr>
                             <td>
                                 <i class="fa-solid fa-square  fa-xl fa-fw text-info"></i> Gastos
                             </td>
-                            <td class="text-dark font-weight-bold">S/ 0.00 </td>
+                            <td class="text-dark font-weight-bold">S/ {{$gastoshoy}} </td>
                         </tr>
                         <tr>
                             <td>
                                 <h5 class="text-success text-center">Ingresos Totales</h5>
                             </td>
-                            <td class="text-success font-weight-bold">S/ 0.00 </td>
+                            <td class="text-success font-weight-bold">S/ {{$ingresoshoy}} </td>
                         </tr>
                         <tr>
                             <td>
                                 <h5 class="text-danger text-center">Egresos Totales</h5>
                             </td>
-                            <td class="text-danger font-weight-bold">S/ 0.00 </td>
+                            <td class="text-danger font-weight-bold">S/ {{$gastoshoy}} </td>
                         </tr>
                         <tr>
                             <td>
                                 <h5 class="text-dark text-center">Saldo</h5>
                             </td>
-                            <td class="text-dark font-weight-bold">S/ 0.00 </td>
+                            @php
+                                $saldo=$ingresoshoy-$gastoshoy;
+                            @endphp
+                            <td class="text-dark font-weight-bold">S/ {{$saldo}} </td>
                         </tr>
                         <tr>
                             <td>
                                 <h5 class="text-primary text-center">Monto Inicial + Saldo</h5>
                             </td>
-                            <td class="text-primary font-weight-bold">S/  @if($historial_cajas) {{ number_format($historial_cajas->monto_apertura,2)}} @else 0.00 @endif </td>
+                            <td class="text-primary font-weight-bold">S/  @if($historial_cajas) {{ number_format($historial_cajas->monto_apertura+$saldo,2)}} @else 0.00 @endif </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="col-md-6">
-
+                <form action="{{ route('guardar-movimiento')}}" method="POST">
+                    @csrf
+                    <h3>REGISTRAR MOVIMIENTO</h3>
+                    <div class="row">
+                        <div class="col-md-6 mb-2">
+                            <label for="" class="col-form-label col-form-label-sm font-weight-bold">DESCRIPCION</label>
+                            <input type="text" name="descripcion" class="form-control form-control-sm @error('descripcion') is-invalid @enderror" value="{{ old('descripcion') }}"/>
+                            @error('descripcion')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-md-4 mb-2">
+                            <label for="" class="col-form-label col-form-label-sm font-weight-bold @error('descripcion') is-invalid @enderror">TIPO</label>
+                            <select name="tipo" class="form-control form-control-sm">
+                                <option value="INGRESO">INGRESO</option>
+                                <option value="GASTO">GASTO</option>
+                            </select>
+                            @error('tipo')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-md-2 mb-2">
+                            <label for="" class="col-form-label col-form-label-sm font-weight-bold">MONTO</label>
+                            <input type="text" name="monto" placeholder="0.00" class="form-control form-control-sm @error('monto') is-invalid @enderror" value="{{ old('monto') }}"/>
+                            @error('monto')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-success btn-sm me-1">
+                                <i class="fas fa-save"></i> Guardar
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

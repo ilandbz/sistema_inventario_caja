@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdministrarCajaController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\HistorialCajaController;
+use App\Http\Controllers\MovimientoCaja;
+use App\Http\Controllers\MovimientoCajaController;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\ProductoPerecederoController;
 use App\Http\Controllers\UsuarioController;
@@ -42,6 +44,12 @@ Route::group([ 'prefix' => 'administrar-caja', 'middleware' => ['auth:sanctum']]
     Route::post('/abrir-caja',[AdministrarCajaController::class,'controlAbrirCaja'])->name('administrar-caja.abrir-caja');
     Route::get('/cerrar-caja-vista',[AdministrarCajaController::class,'vistaCerrarCaja'])->name('Cerrar Caja');
     Route::post('/cerrar-caja',[AdministrarCajaController::class,'controlCerrarCaja'])->name('administrar-caja.cerrar-caja');
+});
+
+
+Route::group([ 'prefix' => 'movimiento-caja', 'middleware' => ['auth:sanctum']],function(){
+    Route::post('/',[MovimientoCajaController::class,'store'])->name('guardar-movimiento');
+    Route::get('/movimientos',[MovimientoCajaController::class,'movimientos'])->name('movimientos-caja');
 });
 
 Route::group([ 'prefix' => 'historial-cajas', 'middleware' => ['auth:sanctum']],function(){

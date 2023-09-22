@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DetalleVenta;
+use App\Models\MovimientoCaja;
 use App\Models\Producto;
 use App\Models\Venta;
 use Carbon\Carbon;
@@ -49,15 +50,23 @@ class VentaController extends Controller
             $detalle_venta->cantidad = $detalle['cantidad'];
             $detalle_venta->precio_unidad = $detalle['precio'];
             $detalle_venta->importe = $detalle['importe'];
-
             $detalle_venta->save();
 
             //Actualizamos stock Producto
-
             $producto = Producto::where('id', $detalle['id'])->first();
             $producto->cantidad -= $detalle['cantidad'];
             $producto->save();
+
         }
+
+        //Actualizamos saldo caja
+        $movimientocaja = new MovimientoCaja();
+        $movimientocaja->fechahora = date('Y-m-d h:i:s');
+        $movimientocaja->user_id = Auth::user()->id;
+        $movimientocaja->tipo = 'INGRESO';
+        $movimientocaja->descripcion = 'VENTA DE PRODUCTOS CON EL ID : '.$venta->id;
+        $movimientocaja->monto = $request->total;
+        $movimientocaja->save();
 
         return response()->json([
             'ok' => 1,
