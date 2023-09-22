@@ -49,6 +49,38 @@
                         </div>
                     </div>
                     <div class="form-group row">
+                        <label class="col-form-label col-form-label-sm col-md-3 font-weight-bold">Categoria</label>
+                        <div class="col-md-5 mb-1">
+                            <select name="categoria_id" id="categoria_id" class="form-control @error('cateoria_id') is-invalid @enderror">
+                                <option value="" disabled selected>Seleccione</option>
+                                @foreach ($categorias as $categoria)
+                                    <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+                                @endforeach
+                            </select>
+                            @error('categoria_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-form-label col-form-label-sm col-md-3 font-weight-bold">Tipo Productos</label>
+                        <div class="col-md-5 mb-1">
+                            <select name="tipo_id" id="tipo_id" class="form-control @error('tipo_id') is-invalid @enderror">
+                                <option value="" disabled selected>Seleccione</option>
+                                @foreach ($tipo_productos as $tipoproducto)
+                                    <option value="{{$tipoproducto->id}}">{{$tipoproducto->nombre}}</option>
+                                @endforeach
+                            </select>
+                            @error('categoria_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>                    
+                    <div class="form-group row">
                         <label class="col-form-label col-form-label-sm col-md-3 font-weight-bold">Fecha Vence</label>
                         <div class="col-md-5 mb-1">
                             <input type="date" class="form-control @error('fecha_vencimiento') is-invalid @enderror"  name="fecha_vencimiento"
@@ -77,4 +109,7 @@
         </div>
     </div>
 </form>
+@endsection
+@section('scripts')
+@include('almacen.producto.script')
 @endsection

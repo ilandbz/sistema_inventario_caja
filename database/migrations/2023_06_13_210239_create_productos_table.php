@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('tipo_id')->nullable();
-            $table->unsignedBigInteger('categoria_id')->nullable();
+            $table->foreignId('tipo_id')->nullable()->constrained('tipo_productos')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('categoria_id')->nullable()->constrained('categorias')->onUpdate('cascade')->onDelete('cascade');
             $table->string('nombre');
             $table->decimal('precio',18,2);
             $table->integer('cantidad');

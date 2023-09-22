@@ -5,8 +5,7 @@
     <div class="card-header">
         <h6 class="card-title">
             Listado de Productos
-            <a class="btn btn-danger btn-sm ml-1" href="{{route('productos.create')}}"
-            >
+            <a class="btn btn-danger btn-sm ml-1" href="{{route('productos.create')}}">
                 <i class="fa fa-plus"></i>
             </a>
         </h6>
@@ -29,11 +28,10 @@
                         <thead class="table-dark">
                             <tr>
                                 <th class="text-center">#</th>
-                                {{-- <th>Categoría</th> --}}
                                 <th class="text-center">Descripción</th>
                                 <th class="text-center">Precio</th>
                                 <th class="text-center">Stock</th>
-                                {{-- <th class="text-center">Es Activo</th> --}}
+                                <th class="text-center">Categoria</th>
                                 <th class="text-center">Acciones</th>
                             </tr>
                         </thead>
@@ -44,6 +42,7 @@
                                 <td>{{ $producto->nombre }}</td>
                                 <td>{{ $producto->precio }}</td>
                                 <td>{{ $producto->cantidad }}</td>
+                                <td>{{ $producto->categorias->nombre }}</td>
                                 <td>
                                     <a  class="btn btn-sm btn-warning" href="{{ route("productos.edit",$producto) }}">
                                         <i class="fas fa-edit"></i>

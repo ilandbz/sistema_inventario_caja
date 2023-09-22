@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Producto;
+use App\Models\TipoProducto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -10,13 +12,17 @@ class ProductoController extends Controller
 {
     public function index()
     {
-        $productos = Producto::paginate(10);
-        return view('almacen.producto.inicio',compact('productos'));
+        $data['productos'] = Producto::with(['categorias:id,nombre', 'tipo_productos:id,nombre'])->get();
+        //$data['productos'] = Producto::with(['categorias:id,nombre', 'tipo_productos:id,nombre'])->paginate(10);
+
+        return view('almacen.producto.inicio',$data);
     }
 
     public function create()
     {
-        return view('almacen.producto.create');
+        $data['categorias'] = Categoria::get();
+        $data['tipo_productos'] = TipoProducto::get();
+        return view('almacen.producto.create', $data);
     }
 
     public function store(Request $request)
@@ -25,6 +31,8 @@ class ProductoController extends Controller
             'nombre' => 'required|string|max:191',
             'precio' => 'required|numeric',
             'cantidad' => 'required|numeric',
+            'tipo_id'   => 'required',
+            'categoria_id' => 'required'
         ];
         $mensajes = [
             'required' => '* campo oblogatorio',
@@ -39,6 +47,8 @@ class ProductoController extends Controller
             'nombre' => $request->nombre,
             'precio' => $request->precio,
             'cantidad' => $request->cantidad,
+            'tipo_id' => $request->tipo_id,
+            'categoria_id' => $request->categoria_id,
             'fecha_vencimiento' => $request->fecha_vencimiento
         ]);
 
@@ -83,11 +93,9 @@ class ProductoController extends Controller
             'El Producto '.$prod->nombre.' fue modificado Satisfactoriamente !'
         );
     }
-
     public function buscarProducto(Request $request)
     {
         $buscar= mb_strtoupper($request->buscar);
-
         return Producto::select('id','nombre','precio','cantidad')->where(
             DB::Raw("upper(nombre)"),'like','%'.$buscar.'%')
             ->get();
