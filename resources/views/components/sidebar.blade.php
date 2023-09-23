@@ -46,12 +46,12 @@
                                 <p>Productos</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a href="/producto-perecederos" class="nav-link @if( Request::is('producto-perecederos')) active @endif">
                                 <i class="nav-icon fa-regular fa-circle"></i>
                                 <p>Productos Perecederos</p>
                             </a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </li>
                 <li class="nav-item @if( in_array( Request::path(), ['administrar-caja','historial-cajas'] )) menu-open @endif">

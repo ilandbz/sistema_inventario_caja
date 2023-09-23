@@ -9,7 +9,7 @@
     </div>
     <div class="card-body">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 <table class=" table table-sm ">
                     <thead class="table-dark">
                         <tr>
@@ -70,6 +70,9 @@
                         @endforelse
                     </tbody>
                 </table>
+            </div>
+            <div class="col-md-6">
+                <iframe id="pdfPreview" width="100%" height="500"></iframe>
             </div>
         </div>
         <div class="row">

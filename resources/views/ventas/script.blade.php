@@ -12,13 +12,30 @@
         created() {},
         methods: {
             verTicket(ventaId) {
-                axios.get(`venta/verticket?${ventaId}`, {
-                    responseType: 'blob' // Indica que esperas una respuesta binaria (PDF)
-                })
+                const url = '{{ route('ver-ticket') }}?venta_id='+ventaId;
+                const params = {
+                    venta_id: ventaId,
+                };
+                const opciones = {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/pdf',
+                    },
+                };
+                
+                //url.search = new URLSearchParams(params).toString();
+                fetch(url, opciones)
                 .then(response => {
-                    const blob = new Blob([response.data], { type: 'application/pdf' });
+                    if (!response.ok) {
+                        throw new Error('Error en la solicitud');
+                    }
+                    return response.blob();
+                })
+                .then(blob => {
                     const url = window.URL.createObjectURL(blob);
-                    window.open(url, '_blank');
+                    const iframe = document.getElementById('pdfPreview');
+                    iframe.src = url;
+                    iframe.setAttribute('sandbox', 'allow-same-origin allow-scripts');
                 })
                 .catch(error => {
                     console.error(error);

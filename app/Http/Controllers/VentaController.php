@@ -100,25 +100,20 @@ class VentaController extends Controller
     }
     public function VerTicket(Request $request)
     {
-        // Crear una instancia de Dompdf
         $dompdf = new Dompdf();
-
-        // Opciones de configuración (si es necesario)
         $options = new Options();
         $options->set('isHtml5ParserEnabled', true);
         $options->set('isPhpEnabled', true);
+        $dompdf->setPaper("b8");
         $dompdf->setOptions($options);
+        $data['venta'] = Venta::with(['detalle_ventas:id,producto_id,venta_id,cantidad,precio_unidad,importe', 'detalle_ventas.producto:id,nombre'])
+        ->where('id', $request->venta_id)
+        ->first();
 
-        // Generar el contenido HTML en una variable $html
-        $html = '<html><body>Mi contenido PDF</body></html>';
-
-        // Cargar el contenido HTML en Dompdf
+        
+        $html = view('ventas.pdf.tiket', $data);
         $dompdf->loadHtml($html);
-
-        // Renderizar el PDF
         $dompdf->render();
-
-        // Enviar el PDF al navegador
         $dompdf->stream();
     }
 }

@@ -153,6 +153,34 @@ class ProductoSeeder extends Seeder
                 'precio'    => 2.00,
                 'cantidad'  => 10,
             ],
+            [
+                'tipo_id' => TipoProducto::where('nombre', 'TORTAS')->value('id'),
+                'categoria_id' => Categoria::where('nombre', 'TORTAS')->value('id'),
+                'nombre' => 'TAJADA',
+                'precio'    => 2.00,
+                'cantidad'  => 10,
+            ],
+            [
+                'tipo_id' => TipoProducto::where('nombre', 'OTROS')->value('id'),
+                'categoria_id' => Categoria::where('nombre', 'OTROS')->value('id'),
+                'nombre' => 'BOCADITOS X CIENTO',
+                'precio'    => 2.00,
+                'cantidad'  => 10,
+            ],
+            [
+                'tipo_id' => TipoProducto::where('nombre', 'OTROS')->value('id'),
+                'categoria_id' => Categoria::where('nombre', 'OTROS')->value('id'),
+                'nombre' => 'BOCADITOS X MEDIO CIENTO',
+                'precio'    => 2.00,
+                'cantidad'  => 10,
+            ],
+            [
+                'tipo_id' => TipoProducto::where('nombre', 'OTROS')->value('id'),
+                'categoria_id' => Categoria::where('nombre', 'OTROS')->value('id'),
+                'nombre' => 'BOCADITOS X DOCENA',
+                'precio'    => 2.00,
+                'cantidad'  => 10,
+            ],            
         ];
         foreach ($productos as $menuData) {
             $producto = Producto::firstOrCreate($menuData);
