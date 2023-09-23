@@ -9,6 +9,9 @@ use App\Models\Venta;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 
 class VentaController extends Controller
 {
@@ -94,5 +97,28 @@ class VentaController extends Controller
             'ok' => 1,
             'mensaje' => 'Venta habilitada satisfactoriamente'
         ]);
+    }
+    public function VerTicket(Request $request)
+    {
+        // Crear una instancia de Dompdf
+        $dompdf = new Dompdf();
+
+        // Opciones de configuración (si es necesario)
+        $options = new Options();
+        $options->set('isHtml5ParserEnabled', true);
+        $options->set('isPhpEnabled', true);
+        $dompdf->setOptions($options);
+
+        // Generar el contenido HTML en una variable $html
+        $html = '<html><body>Mi contenido PDF</body></html>';
+
+        // Cargar el contenido HTML en Dompdf
+        $dompdf->loadHtml($html);
+
+        // Renderizar el PDF
+        $dompdf->render();
+
+        // Enviar el PDF al navegador
+        $dompdf->stream();
     }
 }

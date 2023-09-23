@@ -66,6 +66,7 @@ Route::group([ 'prefix' => 'venta', 'middleware' => ['auth:sanctum']],function()
     });
     Route::post('anular-venta',[VentaController::class,'anularVenta']);
     Route::post('habilitar-venta',[VentaController::class,'habilitarVenta']);
+    Route::get('/verticket',[VentaController::class,'VerTicket'])->name('Ver-ticket');
 });
 
 // Route::group([ 'prefix' => 'venta-nueva', 'middleware' => ['auth:sanctum']],function(){

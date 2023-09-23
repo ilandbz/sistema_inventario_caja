@@ -46,6 +46,9 @@
                             </td>
                             <td>
                                 @if($venta->estado==1)
+                                <button type="button" class="btn btn-sm btn-warning" title="Ver Ticket" @click="verTicket({{$venta->id}})">
+                                    <i class="fas fa-ticket"></i>
+                                </button>&nbsp;
                                 <button type="button" class="btn btn-sm btn-danger"
                                     title="Anular venta" @click="anularVenta({{$venta->id}})">
                                     <i class="fas fa-ban"></i>

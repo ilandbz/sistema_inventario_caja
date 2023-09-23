@@ -11,6 +11,19 @@
         computed: {},
         created() {},
         methods: {
+            verTicket(ventaId) {
+                axios.get(`venta/verticket?${ventaId}`, {
+                    responseType: 'blob' // Indica que esperas una respuesta binaria (PDF)
+                })
+                .then(response => {
+                    const blob = new Blob([response.data], { type: 'application/pdf' });
+                    const url = window.URL.createObjectURL(blob);
+                    window.open(url, '_blank');
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+            },
             anularVenta(id) {
                 Swal.fire({
                     icon:'question',
